@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Alberto Zugazagoitia">
+    <title>Anales de la Ciencia</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+
+</head>
+<body>
+
+<header class="hero is-primary">
+    <div class="container hero-body">
+        <h1 class="title is-1">
+            Anales de la Ciencia
+        </h1>
+    </div>
+</header>
+
+<!---  LOGIN BOX --->
+<section class="section">
+    <div class="container">
+        <form class="box">
+            <div class="level">
+                <div class="level-left">
+                    <div class="level-item">
+                        <label class="label">Usuario: </label>
+                    </div>
+
+                    <div class="field level-item mb-0">
+                        <div class="control">
+                                <input class="input" type="email" placeholder="e.g. alex@example.com">
+                        </div>
+                    </div>
+
+                    <div class="level-item">
+                        <label class="label">Contraseña: </label>
+                    </div>
+
+                    <div class="field level-item mb-0">
+
+                        <div class="control">
+                                <input class="input" type="password" placeholder="********">
+                        </div>
+                    </div>
+
+                    <div class="level-item">
+                        <button class="button is-primary">Login</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+</section>
+<!--- /LOGIN BOX --->
+
+<!---  CONTENT --->
+<section class="container box">
+    <div class="columns">
+        <div class="column" id="productCol">
+
+        </div>
+        <div class="column" id="personCol">
+
+        </div>
+        <div class="column" id="entityCol">
+
+        </div>
+    </div>
+</section>
+
+<template id="cardRow">
+    <a class="px-1" id="card-link">
+        <div class="card">
+            <div class="card-content">
+                <div class="content">
+                    <div class="level">
+                        <div class="level-left level-item">
+                            <p class="image is-64x64 mb-0 mr-3">
+                                <img id="card-img" src="IMAGE_URL">
+                            </p>
+                            <h3 id="card-name" class="subtitle is-3 mt-0">DATA_NAME</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+</template>
+
+<!--- /CONTENT --->
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
