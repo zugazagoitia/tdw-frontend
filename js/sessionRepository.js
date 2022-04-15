@@ -2,17 +2,17 @@ import {Reader, User, Writer} from "./model.js";
 
 export function loadSession(){
     let session = JSON.parse(sessionStorage.getItem('session'));
-    console.log(session);
     if (session){
         switch (session._role){
             case 'user':
+                saveSession(new User());
                 return new User();
             case 'reader':
+                saveSession(new Reader());
                 return new Reader();
             case 'writer':
                 return new Writer(session._username, session._password);
         }
-        return session;
     } else return new Reader();
 }
 
@@ -20,7 +20,12 @@ export function saveSession(session){
     sessionStorage.setItem('session', JSON.stringify(session));
 }
 
-export function login(username, password){
+
+export function clearSession(){
+    sessionStorage.removeItem('session');
+}
+
+export function auth(username, password){
     //Check if user exists in local storage and if password is correct
     let user = JSON.parse(localStorage.getItem("user-"+username));
     if (user && user._password === password){

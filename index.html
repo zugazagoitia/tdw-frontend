@@ -18,19 +18,28 @@
     </div>
 </header>
 
+
 <!---  LOGIN BOX --->
 <section class="section">
+    <div class="container box is-flex is-justify-content-center">
+        <button class="button is-info is-light is-center" id="sampleDataButton">Cargar datos de Prueba</button>
+    </div>
+
     <div class="container">
-        <form class="box">
+        <div class="notification is-danger is-light is-hidden" id="wrongLoginNotification">
+            <button class="delete"></button>
+            Credenciales incorrectas
+        </div>
+        <form id="loginForm" class="box">
             <div class="level">
                 <div class="level-left">
                     <div class="level-item">
-                        <label class="label">Usuario: </label>
+                        <label class="label" >Usuario: </label>
                     </div>
 
                     <div class="field level-item mb-0">
                         <div class="control">
-                                <input class="input" type="email" placeholder="e.g. alex@example.com">
+                                <input class="input" name="username" type="text" placeholder="username">
                         </div>
                     </div>
 
@@ -41,20 +50,38 @@
                     <div class="field level-item mb-0">
 
                         <div class="control">
-                                <input class="input" type="password" placeholder="********">
+                                <input class="input" type="password" name="password" placeholder="********">
                         </div>
                     </div>
 
                     <div class="level-item">
-                        <button class="button is-primary">Login</button>
+                        <button class="button is-primary" type="submit">Login</button>
                     </div>
                 </div>
 
             </div>
 
         </form>
+        <div class="is-hidden" id="loggedInBox">
+            <div class="level box">
+                <div class="level-left">
+                    <div class="level-item">
+                        <h4 class="title is-4">Bienvenido <strong id="loggedInName">nombre</strong></h4>
+                    </div>
+                </div>
+                <div class="level-right">
+                    <div class="level-item">
+                        <button class="button is-primary" id="logoutButton">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+
+
 </section>
+
 <!--- /LOGIN BOX --->
 
 <!---  CONTENT --->
@@ -85,6 +112,11 @@
                             <h3 id="card-name" class="subtitle is-3 mt-0">DATA_NAME</h3>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="card-footer is-hidden" id="card-delete">
+                <div class="card-footer-item">
+                    <span id="card-delete-button" class="has-text-weight-bold">Eliminar</span>
                 </div>
             </div>
         </div>

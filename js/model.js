@@ -6,8 +6,8 @@ export class User{
     constructor() {
         this._role = "user";
     }
-    get role(){
-        return this._role;
+    role(){
+        return "user";
     }
 }
 
@@ -18,8 +18,8 @@ export class Reader extends User{
         this._role = "reader";
     }
 
-    get role(){
-        return this._role;
+    role(){
+        return "reader";
     }
 }
 
@@ -46,8 +46,8 @@ export class Writer extends User{
         this._role= "writer";
     }
 
-    get role(){
-        return _role;
+    role(){
+        return "writer";
     }
 }
 

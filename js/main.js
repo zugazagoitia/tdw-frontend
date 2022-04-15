@@ -2,20 +2,21 @@
  *
  */
 import {showIndex} from "./index.js";
-import {loadSession, register} from "./sessionRepository.js";
+import {loadSession} from "./sessionRepository.js";
+import {loadEntities, loadPeople, loadProducts} from "./dataRepository.js";
+import {setUpNavbar} from "./loginBox.js";
+
 
 /**
- *  Carga de datos de prueba
+ *  Inicialización de la aplicación
  */
-
-register("hemingway", "123456","writer");
-register("dostoyevsky", "password","writer");
-register("tolstoy", "qwerty","writer");
-
-let products = localStorage.getItem()
-
+let people = loadPeople();
+let products = loadProducts();
+let entities = loadEntities();
 
 let session = loadSession();
 
+//Configurar los modales
+setUpNavbar(session);
 
-//showIndex()
+showIndex(products, entities, people, session);
