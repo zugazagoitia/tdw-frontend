@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es-ES" class="has-background-info-light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Alberto Zugazagoitia">
+  <title>Anales de la Ciencia</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+</head>
+<body>
+
+<header class="hero is-primary">
+  <div class="container hero-body">
+    <h1 class="title is-1">
+      Anales de la Ciencia
+    </h1>
+  </div>
+</header>
+
+
+
+<!-- Navbar -->
+<section class="section">
+  <div class="container ">
+    <form class="box has-background-info-light">
+      <div class="level">
+        <div class="level-left">
+          <div class="level-item">
+            <button class="button is-primary" type="button" id="index-button">Índice</button>
+          </div>
+        </div>
+        <div class="level-right is-hidden" id="crudMenu">
+          <div class="level-item">
+            <button class="button is-primary is-light" type="button" id="editButton">Modificar</button>
+          </div>
+          <div class="level-item">
+            <button class="button is-primary is-light" type="button" id="deleteButton">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+<!--/Navbar -->
+
+
+<section class="container box has-background-info-light" style="background-color: rgba(0,209,178,0.44)">
+  <div class="columns">
+    <div class="column is-one-third">
+      <div class="px-1" >
+        <div class="card">
+          <div class="card-content" id="data-card-content">
+            <!--Filled by JS-->
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="column is-two-thirds is-flex box p-0" id="iframe-container">
+      <!--Filled by JS-->
+    </div>
+
+  </div>
+</section>
+
+<footer class="footer pb-5">
+  <div class="level has-text-centered" id="footer-container">
+  </div>
+</footer>
+
+<div class="modal" id="edit-data-modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Editar Elemento</p>
+      <button class="delete" id="modal-close-button" aria-label="cerrar"></button>
+    </header>
+    <section class="modal-card-body">
+      <form id="edit-data-form">
+        <div class="field">
+          <label class="label">Nombre</label>
+          <div class="control">
+            <input class="input" type="text" name="name" placeholder="Nombre">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Nacimiento</label>
+          <div class="control">
+            <input class="input" type="text" name="birth" placeholder="Nacimiento">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Muerte</label>
+          <div class="control">
+            <input class="input" type="text" name="death" placeholder="Muerte">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Imagen</label>
+          <div class="control">
+            <input class="input" type="url" name="imgUrl" placeholder="https://link.to/img">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Wiki Url</label>
+          <div class="control">
+            <input class="input" type="url" name="wikiUrl" placeholder="https://link.to/wiki">
+          </div>
+        </div>
+
+        <div class="select is-multiple is-fullwidth is-hidden" id="peopleListBox">
+          <label class="label">Personas</label>
+          <select name="people[]" multiple size="3" id="peopleList">
+          </select>
+        </div>
+
+        <div class="select is-multiple is-fullwidth pt-2 is-hidden" id="entityListBox">
+          <label class="label">Entidades</label>
+          <select name="entities[]" multiple size="3" id="entityList">
+          </select>
+        </div>
+      </form>
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button is-success" type="submit" form="edit-data-form" id="modal-save-button">Guardar cambios</button>
+      <button class="button" type="button" id="modal-cancel-button">Cancelar</button>
+    </footer>
+  </div>
+</div>
+
+</body>
+
+<template id="data-card-content-template">
+  <div class="content container">
+    <h2 class="is-2 has-text-centered" id="card-data-name"></h2>
+    <h3 class="is-3 has-text-centered" id="card-data-born"></h3>
+    <figure class="image">
+      <img class="mt-2" src="img/1200px-HTML5_logo_black.svg.png" id="card-data-img">
+    </figure>
+  </div>
+</template>
+
+<template id="footer-item-template">
+  <a class="image is-64x64 mb-0 mr-3 level-item" id="footer-item-link" href="">
+    <img id="footer-item-image">
+  </a>
+</template>
+
+<template id="footer-template">
+  <div class="level-left">
+
+  </div>
+  <div class="level-right">
+
+  </div>
+</template>
+
+<template id="iframe-container-template">
+  <iframe class="is-flex-grow-1 is-fullwidth is-fullheight m-0 p-0" id="iframe-element"></iframe>
+</template>
+<script type="module" src="js/main.js"></script>
+</html>

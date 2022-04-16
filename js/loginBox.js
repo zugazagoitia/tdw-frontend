@@ -1,7 +1,7 @@
 import {auth, clearSession} from "./sessionRepository.js";
 import {loadSampleData} from "./sampleData.js";
 
-export async function setUpNavbar(session) {
+export async function setUpLoginBar(session) {
     document.addEventListener('DOMContentLoaded', () => {
         (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
             const $notification = $delete.parentNode;

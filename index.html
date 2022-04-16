@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="es-ES">
+<html lang="es-ES" class="has-background-info-light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Alberto Zugazagoitia">
     <title>Anales de la Ciencia</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-
 </head>
 <body>
 
@@ -22,7 +21,7 @@
 <!---  LOGIN BOX --->
 <section class="section">
     <div class="container box is-flex is-justify-content-center">
-        <button class="button is-info is-light is-center" id="sampleDataButton">Cargar datos de Prueba</button>
+        <button class="button is-info is-light is-center" id="sampleDataButton">Cargar datos de Prueba a LocalStorage</button>
     </div>
 
     <div class="container">
@@ -34,12 +33,12 @@
             <div class="level">
                 <div class="level-left">
                     <div class="level-item">
-                        <label class="label" >Usuario: </label>
+                        <label class="label">Usuario: </label>
                     </div>
 
                     <div class="field level-item mb-0">
                         <div class="control">
-                                <input class="input" name="username" type="text" placeholder="username">
+                            <input class="input" name="username" type="text" placeholder="username">
                         </div>
                     </div>
 
@@ -50,7 +49,7 @@
                     <div class="field level-item mb-0">
 
                         <div class="control">
-                                <input class="input" type="password" name="password" placeholder="********">
+                            <input class="input" type="password" name="password" placeholder="********">
                         </div>
                     </div>
 
@@ -79,52 +78,131 @@
     </div>
 
 
-
 </section>
 
 <!--- /LOGIN BOX --->
 
 <!---  CONTENT --->
-<section class="container box">
-    <div class="columns">
-        <div class="column" id="productCol">
+<section class="section pt-2">
+    <div class="container box" style="background-color: rgba(0,209,178,0.44)">
+        <div class="columns">
+            <div class="column" id="productCol">
 
-        </div>
-        <div class="column" id="personCol">
+            </div>
+            <div class="column" id="personCol">
 
-        </div>
-        <div class="column" id="entityCol">
+            </div>
+            <div class="column" id="entityCol">
 
+            </div>
         </div>
     </div>
 </section>
 
+<section class="section pt-1 is-hidden" id="add-items-section">
+    <div class="container box has-background-warning-light">
+        <div class="columns">
+            <div class="column">
+                <button class="button is-info is-fullwidth" type="button" id="addProductButton">Agregar Producto
+                </button>
+            </div>
+            <div class="column">
+                <button class="button is-info is-fullwidth" type="button" id="addPersonButton">Agregar Persona</button>
+            </div>
+            <div class="column">
+                <button class="button is-info is-fullwidth" type="button" id="addEntityButton">Agregar Entidad</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--- /CONTENT --->
+
+<div class="modal" id="edit-data-modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">Añadir Elemento</p>
+            <button class="delete" id="modal-close-button" aria-label="cerrar"></button>
+        </header>
+        <section class="modal-card-body">
+            <form id="edit-data-form">
+                <div class="field">
+                    <label class="label">Nombre</label>
+                    <div class="control">
+                        <input class="input" type="text" name="name" placeholder="Nombre">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Nacimiento</label>
+                    <div class="control">
+                        <input class="input" type="text" name="birth" placeholder="Nacimiento">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Muerte</label>
+                    <div class="control">
+                        <input class="input" type="text" name="death" placeholder="Muerte">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Imagen</label>
+                    <div class="control">
+                        <input class="input" type="url" name="imgUrl" placeholder="https://link.to/img">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Wiki Url</label>
+                    <div class="control">
+                        <input class="input" type="url" name="wikiUrl" placeholder="https://link.to/wiki">
+                    </div>
+                </div>
+
+                <div class="select is-multiple is-fullwidth is-hidden" id="peopleListBox">
+                    <label class="label">Personas</label>
+                    <select name="people[]" multiple size="3" id="peopleList">
+                    </select>
+                </div>
+
+                <div class="select is-multiple is-fullwidth pt-2 is-hidden" id="entityListBox">
+                    <label class="label">Entidades</label>
+                    <select name="entities[]" multiple size="3" id="entityList">
+                    </select>
+                </div>
+            </form>
+        </section>
+        <footer class="modal-card-foot">
+            <button class="button is-success" type="submit" form="edit-data-form" id="modal-save-button">Guardar cambios</button>
+            <button class="button" type="button" id="modal-cancel-button">Cancelar</button>
+        </footer>
+    </div>
+</div>
+
+</body>
+
 <template id="cardRow">
-    <a class="px-1" id="card-link">
-        <div class="card">
-            <div class="card-content">
+    <div class="my-3 card">
+        <div class="card-content">
+            <a id="card-link">
                 <div class="content">
                     <div class="level">
                         <div class="level-left level-item">
-                            <p class="image is-64x64 mb-0 mr-3">
+                            <div class="image is-64x64 mb-0 mr-3 " style="overflow: hidden">
                                 <img id="card-img" src="IMAGE_URL">
-                            </p>
+                            </div>
                             <h3 id="card-name" class="subtitle is-3 mt-0">DATA_NAME</h3>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="card-footer is-hidden" id="card-delete">
-                <div class="card-footer-item">
-                    <span id="card-delete-button" class="has-text-weight-bold">Eliminar</span>
-                </div>
+            </a>
+        </div>
+        <div class="card-footer is-hidden" id="card-delete">
+            <div class="card-footer-item">
+                <span id="card-delete-button" class="has-text-weight-bold">Eliminar</span>
             </div>
         </div>
-    </a>
+    </div>
 </template>
 
-<!--- /CONTENT --->
-
 <script type="module" src="js/main.js"></script>
-</body>
 </html>
