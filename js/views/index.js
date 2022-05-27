@@ -199,7 +199,8 @@ async function renderRows(dataElements, column, deleteButton = false) {
             });
         }
 
-        clone.querySelector('#card-link').onclick = () => {
+        clone.querySelector('#card-link').addEventListener("click",  () => {
+            console.log(row);
             let type;
 
             switch (true) {
@@ -216,7 +217,7 @@ async function renderRows(dataElements, column, deleteButton = false) {
                     throw new Error("Invalid type");
             }
             window.location.href = "./details.html?id=" + row.id + "&type=" + type;
-        }
+        });
         column.appendChild(clone);
     }
 }

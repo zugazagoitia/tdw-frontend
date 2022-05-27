@@ -251,7 +251,7 @@ export class Entity extends DataElement {
         return this._products;
     }
 
-    set entities(products) {
+    set products(products) {
         this._products = products;
     }
 }

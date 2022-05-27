@@ -486,8 +486,9 @@ async function saveProduct() {
     let form = document.getElementById("edit-data-form");
     let formData = new FormData(form);
 
-    let product = getCurrentElement();
+    let product = await getCurrentElement();
 
+    console.log(product);
     if (formData.get("birth")) {
         product.birthDate = formData.get("birth");
     }
@@ -501,16 +502,16 @@ async function saveProduct() {
         product.wikiUrl = formData.get("wikiUrl");
     }
 
-    let persons = formData.getAll("persons[]").map(id => parseInt(id.toString()));
+    let persons = formData.getAll("people[]").map(id => parseInt(id.toString()));
 
     if (persons === null || persons === undefined) {
         persons = [];
     }
-    if (product.persons === null || product.persons === undefined) {
-        product.persons = [];
+    if (product.people === null || product.people === undefined) {
+        product.people = [];
     }
-    let newPersons = persons.filter(id => !product.persons.includes(id));
-    let oldPersons = product.persons.filter(id => !persons.includes(id));
+    let newPersons = persons.filter(id => !product.people.includes(id));
+    let oldPersons = product.people.filter(id => !persons.includes(id));
 
     let entities = formData.getAll("entities[]").map(id => parseInt(id.toString()));
 
@@ -584,7 +585,6 @@ async function fillEditFormWithCurrentDetails(dataElement) {
 
     let entities = dataElement.entities;
     if (entities) {
-        console.log(entities);
         let options = form.querySelector("#entityList").children;
         for (let option of options) {
             if (entities.includes(parseInt(option.value))) {
