@@ -69,7 +69,7 @@ export function clearSession() {
 }
 
 /**
- * Function to login a user.
+ * Function to log in a user.
  * @param username The username of the user.
  * @param password The password of the user.
  * @returns {Promise<Session|null>} A promise that resolves to the session of the user or null if the login failed.
@@ -142,7 +142,6 @@ export async function updateProfile(user) {
         return session.user;
     } else if (response.status === 412) {
         throw new Error("Etag mismatch");
-        return null;
     } else if (response.status === 401) {
         logout();
         return null;
@@ -183,9 +182,9 @@ async function getSelfUser(token, userId) {
  * @returns {any} the payload as an object
  */
 function parseJwt(token) {
-    var base64Url = token.split('.')[1];
-    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
     }).join(''));
 

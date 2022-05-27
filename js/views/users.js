@@ -5,6 +5,7 @@ import {User} from "../model.js";
 
 export async function setUpUsersView() {
 
+    // noinspection JSUnresolvedFunction
     const calendars = bulmaCalendar.attach('[type="date"]', {
         type: 'date',
         dateFormat: 'yyyy-MM-dd',
@@ -86,7 +87,7 @@ async function renderUsers() {
         row.querySelector("#table-row-role").innerHTML = user.role();
 
 
-        //Setup the edit and delete buttons
+        //Set up the edit and delete buttons
         row.querySelector("#table-row-edit").onclick = async function (event) {
             event.target.classList.add('is-loading');
             let etagedUser = await getUser(user.id); //Get the user from the server to get a fresh copy and etag
@@ -119,7 +120,6 @@ async function renderUsers() {
         };
 
         row.querySelector("#table-row-delete").onclick = async function (event) {
-            //add spinner to button that triggers the delete
 
             let confirmDelete = confirm("¿Estás seguro de que quieres eliminar este usuario?");
 
@@ -192,7 +192,6 @@ function setUserUnavailableStyle() {
 
 /**
  * Validates the register form and returns a user with the result if the form is valid.
- * @param {User} user The user to differentiate against.
  * @returns {Object} The data retrieved from the form.
  */
 
@@ -284,16 +283,6 @@ function formDiff() {
 async function createUser() {
     let form = document.getElementById("edit-user-form");
     let formData = new FormData(form);
-
-    const birthElement = document.getElementById("edit-user-form")
-        .querySelector('input[name="birth"]');
-    let birth = null;
-
-    if (birthElement) {
-        // bulmaCalendar instance is available as element.bulmaCalendar
-        birth = birthElement.bulmaCalendar.value()
-    }
-
 
     if (formData.get("username") === "" || formData.get("email") === "" || formData.get("password") === "" || formData.get("role") === "") {
         alert("Faltan campos  obligatorios");

@@ -3,11 +3,13 @@
  * Populate the edit modal with the data from the model and set up minor stuff
  * @param people A list of people to populate the dropdown
  * @param entities A list of entities to populate the dropdown
+ * @param products
  * @returns {Promise<void>} A promise that resolves when the modal is ready
  */
 export async function setupEditModal(people, entities, products){
 
 
+    // noinspection JSUnresolvedFunction
     const calendars = bulmaCalendar.attach('[type="date"]', {
         type: 'date',
         dateFormat: 'yyyy-MM-dd'

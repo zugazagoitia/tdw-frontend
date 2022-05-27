@@ -3,16 +3,15 @@ import {loadSession} from "./sessionRepository.js";
 import {logout} from "../components/loginBox.js";
 import {Person} from "../model.js";
 import {parseProduct} from "./productRepository.js";
+import {apiBaseUrl} from "../main.js";
 
-const serverUrl = "http://localhost:8000";
-const apiBase = serverUrl + "/api/v1";
 
 /**
  * Function to load all persons from the server
  * @returns {Person[]} the persons from the server, empty array if none
  */
 export async function loadPersons() {
-    let url = apiBase + "/persons";
+    let url = apiBaseUrl() + "/persons";
     let response = await fetch(
         url,
         {
@@ -43,7 +42,7 @@ export async function loadPersons() {
  * @returns {Person} the person with the given id, null if none
  */
 export async function getPerson(id) {
-    let url = apiBase + "/persons/" + id;
+    let url = apiBaseUrl() + "/persons/" + id;
     let response = await fetch(
         url,
         {
@@ -71,7 +70,7 @@ export async function getPerson(id) {
  * @returns {Person} the created person, null if none
  */
 export async function createPerson(person) {
-    let url = apiBase + "/persons";
+    let url = apiBaseUrl() + "/persons";
     let data = {
         "name": person.name,
         "birthDate": person.birthDate,
@@ -106,7 +105,7 @@ export async function createPerson(person) {
  * @returns {Person} the updated person, null if none
  */
 export async function updatePerson(person) {
-    let url = apiBase + "/persons/" + person.id;
+    let url = apiBaseUrl() + "/persons/" + person.id;
     let data = {
         ...(person.birthDate) && {"birthDate": person.birthDate},
         ...(person.deathDate) && {"deathDate": person.deathDate},
@@ -140,7 +139,7 @@ export async function updatePerson(person) {
  * @returns {boolean} true if the person exists, false if not
  */
 export async function personExistsByName(name) {
-    let url = apiBase + "/persons/personname/" + name;
+    let url = apiBaseUrl() + "/persons/personname/" + name;
     let response = await fetch(url);
     if (response.ok) {
         return true;
@@ -155,7 +154,7 @@ export async function personExistsByName(name) {
  * @returns {boolean} true if the person was deleted, false if not
  */
 export async function deletePerson(person) {
-    let url = apiBase + "/persons/" + person.id;
+    let url = apiBaseUrl() + "/persons/" + person.id;
     let response = await fetch(url, {
         method: "DELETE",
         headers: {
@@ -180,7 +179,7 @@ export async function deletePerson(person) {
  * @returns {null} if the person does not exist
  */
 export async function getPersonEntities(person) {
-    let url = apiBase + "/persons/" + person.id + "/entities";
+    let url = apiBaseUrl() + "/persons/" + person.id + "/entities";
     let response = await fetch(url);
     if (response.ok) {
         let data = await response.json();
@@ -198,7 +197,7 @@ export async function getPersonEntities(person) {
  * @returns {Person} the person with the new relationship, null if it does not exist
  */
 async function modifyPersonEntity(personId, entityId, operation) {
-    let url = apiBase + "/persons/" + personId + "/entities/" + operation + "/" + entityId;
+    let url = apiBaseUrl() + "/persons/" + personId + "/entities/" + operation + "/" + entityId;
     let response = await fetch(url, {
         method: "PUT",
         headers: {
@@ -243,7 +242,7 @@ export async function removeEntityFromPerson(personId, entityId) {
  * @returns {null} if the person does not exist
  */
 export async function getPersonProducts(person) {
-    let url = apiBase + "/persons/" + person.id + "/products";
+    let url = apiBaseUrl() + "/persons/" + person.id + "/products";
     let response = await fetch(url);
     if (response.ok) {
         let data = await response.json();
@@ -261,7 +260,7 @@ export async function getPersonProducts(person) {
  * @returns {Person} the person with the new relationship, null if it does not exist
  */
 async function modifyPersonProduct(personId, productId, operation) {
-    let url = apiBase + "/persons/" + personId + "/products/" + operation + "/" + productId;
+    let url = apiBaseUrl() + "/persons/" + personId + "/products/" + operation + "/" + productId;
     let response = await fetch(url, {
         method: "PUT",
         headers: {

@@ -13,24 +13,21 @@ import {
     addEntityToProduct,
     addPersonToProduct, createProduct,
     deleteProduct, getProduct,
-    loadProducts, productExistsByName
+    productExistsByName
 } from "../repositories/productRepository.js";
 import {
-    addPersonToEntity, addProductToEntity, createEntity,
+    addPersonToEntity, createEntity,
     deleteEntity,
     entityExistsbyName,
-    getEntity,
-    loadEntities
+    getEntity
 } from "../repositories/entityRepository.js";
 import {
-    addEntityToPerson,
-    addProductToPerson,
     createPerson,
     deletePerson,
     personExistsByName
 } from "../repositories/personRepository.js";
 import {GlobalEntityStore, GlobalPersonStore, GlobalProductStore, loadData} from "../stores.js";
-import {loadSession, saveSession} from "../repositories/sessionRepository.js";
+import {loadSession} from "../repositories/sessionRepository.js";
 import {setUpRegisterForm} from "../components/registerForm.js";
 import {setUpProfileEditModal} from "../components/editProfileModal.js";
 
@@ -141,7 +138,7 @@ export async function showIndex() {
 /**
  * Function to render a given column with a given list of objects
  * @param {DataElement[]} dataElements list List of objects to render
- * @param {HTMLElement} col Column to render
+ * @param column
  * @param {boolean} deleteButton Whether to render a delete button or not
  * @returns {Promise<void>}
  */

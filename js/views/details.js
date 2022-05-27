@@ -4,7 +4,7 @@ import {
     addPersonToProduct,
     deleteProduct,
     getProduct,
-    loadProducts, removeEntityFromProduct, removePersonFromProduct, updateProduct,
+    removeEntityFromProduct, removePersonFromProduct, updateProduct,
 
 } from "../repositories/productRepository.js";
 import {
@@ -20,7 +20,7 @@ import {
     addProductToEntity,
     deleteEntity,
     getEntity,
-    loadEntities, removePersonFromEntity,
+    removePersonFromEntity,
     removeProductFromEntity, updateEntity
 } from "../repositories/entityRepository.js";
 import {GlobalEntityStore, GlobalPersonStore, GlobalProductStore, loadData} from "../stores.js";
@@ -153,7 +153,7 @@ function renderIframe(url) {
 
 /**
  * Function to render the footer of the page.
- * @param dataElement Data element to render.
+ * @param element
  */
 function renderFooter(element) {
     let template = document.querySelector('#footer-template');
@@ -219,7 +219,7 @@ function renderFooter(element) {
 }
 
 /**
- * Function to render the each footer item.
+ * Function to render each footer item.
  * @param dataElement Data element to render.
  * @returns {Node} Node of the footer item.
  */

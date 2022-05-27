@@ -5,6 +5,7 @@ import {loadSession, updateProfile} from "../repositories/sessionRepository.js";
  * @returns {Promise<void>} A promise that resolves when the modal is set up
  */
 export async function setUpProfileEditModal(){
+    // noinspection JSUnresolvedFunction
     const calendars = bulmaCalendar.attach('[type="date"]', {
         type: 'date',
         dateFormat: 'yyyy-MM-dd',

@@ -1,14 +1,13 @@
 /**
  *
  */
-import {setUpIndex, showIndex} from "./views/index.js";
+import {setUpIndex} from "./views/index.js";
 import {loadSession} from "./repositories/sessionRepository.js";
-import {getProduct, loadProducts} from "./repositories/productRepository.js";
+import {getProduct} from "./repositories/productRepository.js";
 import {setUpLoginBar} from "./components/loginBox.js";
 import {setupDetails, showDetails} from "./views/details.js";
-import {getEntity, loadEntities} from "./repositories/entityRepository.js";
-import {getPerson, loadPersons} from "./repositories/personRepository.js";
-import {GlobalEntityStore, GlobalPersonStore, GlobalProductStore} from "./stores.js";
+import {getEntity} from "./repositories/entityRepository.js";
+import {getPerson} from "./repositories/personRepository.js";
 import {setUpUsersView} from "./views/users.js";
 
 

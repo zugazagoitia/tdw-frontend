@@ -1,9 +1,10 @@
 import {loadSession} from "./sessionRepository.js";
 import {logout} from "../components/loginBox.js";
 import {Entity} from "../model.js";
+import {apiBaseUrl} from "../main.js";
+import {parseProduct} from "./productRepository.js";
+import {parsePerson} from "./personRepository.js";
 
-const serverUrl = "http://localhost:8000";
-const apiBase = serverUrl + "/api/v1";
 
 
 /**
@@ -11,7 +12,7 @@ const apiBase = serverUrl + "/api/v1";
  * @returns {Entity[]} the entities from the server, empty array if none
  */
 export async function loadEntities() {
-    let url = apiBase + "/entities";
+    let url = apiBaseUrl() + "/entities";
     let response = await fetch(
         url,
         {
@@ -43,7 +44,7 @@ export async function loadEntities() {
  * @returns {Entity} the entity with the given id, null if none
  */
 export async function getEntity(id) {
-    let url = apiBase + "/entities/" + id;
+    let url = apiBaseUrl() + "/entities/" + id;
     let response = await fetch(
         url,
         {
@@ -72,7 +73,7 @@ export async function getEntity(id) {
  * @returns {Entity} the created entity, null if none
  */
 export async function createEntity(entity) {
-    let url = apiBase + "/entities";
+    let url = apiBaseUrl() + "/entities";
     let data = {
         "name": entity.name,
         "birthDate": entity.birthDate,
@@ -106,7 +107,7 @@ export async function createEntity(entity) {
  * @returns {Entity} the updated entity, null if none
  */
 export async function updateEntity(entity) {
-    let url = apiBase + "/entities/" + entity.id;
+    let url = apiBaseUrl() + "/entities/" + entity.id;
     let data = {
         ...(entity.birthDate) && {"birthDate": entity.birthDate},
         ...(entity.deathDate) && {"deathDate": entity.deathDate},
@@ -140,7 +141,7 @@ export async function updateEntity(entity) {
  * @returns {boolean} true if the entity exists, false if not
  */
 export async function entityExistsbyName(name) {
-    let url = apiBase + "/entities/entityname/" + name;
+    let url = apiBaseUrl() + "/entities/entityname/" + name;
     return (await fetch(url)).ok;
 }
 
@@ -150,7 +151,7 @@ export async function entityExistsbyName(name) {
  * @returns {boolean} true if the entity was deleted, false if not
  */
 export async function deleteEntity(entity) {
-    let url = apiBase + "/entities/" + entity.id;
+    let url = apiBaseUrl() + "/entities/" + entity.id;
     let response = await fetch(url, {
         method: "DELETE",
         headers: {
@@ -175,7 +176,7 @@ export async function deleteEntity(entity) {
  * @returns {null} null if the entity does not exist
  */
 export async function getEntityProducts(entity) {
-    let url = apiBase + "/entities/" + entity.id + "/products";
+    let url = apiBaseUrl() + "/entities/" + entity.id + "/products";
     let response = await fetch(url);
     if (response.ok) {
         let data = await response.json();
@@ -193,7 +194,7 @@ export async function getEntityProducts(entity) {
  * @returns {Entity} the entity with the new relationship, null if it does not exist
  */
 async function modifyEntityProduct(entityId, productId, operation) {
-    let url = apiBase + "/entities/" + entityId + "/products/" + operation + "/" + productId;
+    let url = apiBaseUrl() + "/entities/" + entityId + "/products/" + operation + "/" + productId;
     let response = await fetch(url, {
         method: "PUT",
         headers: {
@@ -238,7 +239,7 @@ export async function removeProductFromEntity(entityId, productId) {
  * @returns {null} null if the entity does not exist
  */
 export async function getEntityPersons(entity) {
-    let url = apiBase + "/entities/" + entity.id + "/persons";
+    let url = apiBaseUrl() + "/entities/" + entity.id + "/persons";
     let response = await fetch(url);
     if (response.ok) {
         let data = await response.json();
@@ -255,7 +256,7 @@ export async function getEntityPersons(entity) {
  * @param operation the operation to perform
  */
 async function modifyEntityPerson(entityId, personId, operation) {
-    let url = apiBase + "/entities/" + entityId + "/persons/" + operation + "/" + personId;
+    let url = apiBaseUrl() + "/entities/" + entityId + "/persons/" + operation + "/" + personId;
     let response = await fetch(url, {
         method: "PUT",
         headers: {

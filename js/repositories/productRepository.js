@@ -3,9 +3,7 @@ import {loadSession} from "./sessionRepository.js";
 import {logout} from "../components/loginBox.js";
 import {parseEntity} from "./entityRepository.js";
 import {parsePerson} from "./personRepository.js";
-import {apiBaseUrl, serverUrl} from "../main.js";
-
-const apiBase = apiBaseUrl();
+import {apiBaseUrl} from "../main.js";
 
 
 /**
@@ -15,7 +13,7 @@ const apiBase = apiBaseUrl();
 export async function loadProducts() {
 
     //Get products from api endpoint /products and parse them
-    let url = apiBase + "/products";
+    let url = apiBaseUrl() + "/products";
     let response = await fetch(
         url
         , {
@@ -47,7 +45,7 @@ export async function loadProducts() {
  * @returns {Product} the product if it exists, null otherwise
  */
 export async function getProduct(productId) {
-    let url = apiBase + "/products/" + productId;
+    let url = apiBaseUrl() + "/products/" + productId;
     let response = await fetch(
         url,
         {
@@ -76,7 +74,7 @@ export async function getProduct(productId) {
  * @returns {Promise<Product>}
  */
 export async function createProduct(product) {
-    let url = apiBase + "/products";
+    let url = apiBaseUrl() + "/products";
     let data = {
         "name": product.name,
         "birthDate": product.birthDate,
@@ -114,7 +112,7 @@ export async function updateProduct(product) {
         throw new Error("Product has no eTag");
     }
 
-    let url = apiBase + "/products/" + product.id;
+    let url = apiBaseUrl() + "/products/" + product.id;
     let data = {
         ...(product.birthDate) && {"birthDate": product.birthDate},
         ...(product.deathDate) && {"deathDate": product.deathDate},
@@ -147,7 +145,7 @@ export async function updateProduct(product) {
  * @returns {boolean} true if the product exists, false otherwise
  */
 export async function productExistsByName(name) {
-    let url = apiBase + "/products/productname/" + name;
+    let url = apiBaseUrl() + "/products/productname/" + name;
     return (await fetch(url)).ok;
 }
 
@@ -157,7 +155,7 @@ export async function productExistsByName(name) {
  * @returns {boolean} true if the product was deleted, false otherwise
  */
 export async function deleteProduct(product) {
-    let url = apiBase + "/products/" + product.id;
+    let url = apiBaseUrl() + "/products/" + product.id;
     let response = await fetch(url, {
         method: "DELETE",
         headers: {
@@ -182,7 +180,7 @@ export async function deleteProduct(product) {
  * @returns {null} if the product does not exist
  */
 export async function getProductEntities(productId) {
-    let url = apiBase + "/products/" + productId + "/entities";
+    let url = apiBaseUrl() + "/products/" + productId + "/entities";
     let response = await fetch(url, {
         method: "GET",
         headers: {
@@ -205,7 +203,7 @@ export async function getProductEntities(productId) {
  * @returns {Product} the updated product
  */
 async function modifyProductEntity(productId, entityId, operation) {
-    let url = apiBase + "/products/" + productId + "/entities/" + operation + "/" + entityId;
+    let url = apiBaseUrl() + "/products/" + productId + "/entities/" + operation + "/" + entityId;
     let response = await fetch(url, {
         method: "PUT",
         headers: {
@@ -251,7 +249,7 @@ export async function removeEntityFromProduct(productId, entityId) {
  */
 
 export async function getProductPersons(productId) {
-    let url = apiBase + "/products/" + productId + "/persons";
+    let url = apiBaseUrl() + "/products/" + productId + "/persons";
     let response = await fetch(url, {
         method: "GET",
         headers: {
@@ -274,7 +272,7 @@ export async function getProductPersons(productId) {
  * @returns {Product} the updated product
  */
 async function modifyProductPerson(productId, personId, operation) {
-    let url = apiBase + "/products/" + productId + "/persons/" + operation + "/" + personId;
+    let url = apiBaseUrl() + "/products/" + productId + "/persons/" + operation + "/" + personId;
     let response = await fetch(url, {
         method: "PUT",
         headers: {

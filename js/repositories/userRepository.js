@@ -1,17 +1,15 @@
 import {apiBaseUrl} from "../main.js";
-import {Product, Reader, User, Writer} from "../model.js";
+import {Reader, User, Writer} from "../model.js";
 import {logout} from "../components/loginBox.js";
 import {loadSession} from "./sessionRepository.js";
-import {parseEntity} from "./entityRepository.js";
 
-const apiBase = apiBaseUrl();
 
 /**
  * Loads all users from the server and parses them into an array of User objects.
  * @returns {Promise<User[]>} A promise that resolves to an array of User objects.
  */
 export async function getUsers() {
-    let url = apiBase + "/users";
+    let url = apiBaseUrl() + "/users";
 
     let response = await fetch(url, {
         method: "GET",
@@ -38,7 +36,7 @@ export async function getUsers() {
  * @returns {User} A User object.
  */
 export async function getUser(userid) {
-    let url = apiBase + "/users/" + userid;
+    let url = apiBaseUrl() + "/users/" + userid;
 
     let response = await fetch(url, {
         method: "GET",
@@ -65,7 +63,7 @@ export async function getUser(userid) {
  * @returns {Promise<User|null>} A promise that resolves to the new User object or null if the user could not be created.
  */
 export async function postUser(user) {
-    let url = apiBase + "/users";
+    let url = apiBaseUrl() + "/users";
 
     let response = await fetch(url, {
         method: "POST",
@@ -93,7 +91,7 @@ export async function postUser(user) {
  * @returns {Promise<User|null>} A promise that resolves to the updated User object or null if the user could not be updated.
  */
 export async function updateUser(user) {
-    let url = apiBase + "/users/" + user.id;
+    let url = apiBaseUrl() + "/users/" + user.id;
 
     let response = await fetch(url, {
         method: "PUT",
@@ -123,7 +121,7 @@ export async function updateUser(user) {
  * @returns {Promise<boolean>} A promise that resolves to true if the user was deleted, false otherwise.
  */
 export async function deleteUser(userid) {
-    let url = apiBase + "/users/" + userid;
+    let url = apiBaseUrl() + "/users/" + userid;
 
     let response = await fetch(url, {
         method: "DELETE",
@@ -145,7 +143,7 @@ export async function deleteUser(userid) {
  * @returns {Promise<Reader|null>} a promise that resolves to the created user, or null if the user could not be created
  */
 export async function registerUser(user) {
-    let url = apiBase + "/users/register";
+    let url = apiBaseUrl() + "/users/register";
     let data = {
         "username": user.username,
         "name": user.name,
@@ -176,7 +174,7 @@ export async function registerUser(user) {
  * @returns {Promise<boolean>} A promise that resolves to true if the user exists, false otherwise.
  */
 export async function usernameAvailable(username) {
-    let url = apiBase + "/users/username/" + username;
+    let url = apiBaseUrl() + "/users/username/" + username;
 
     let response = await fetch(url, {
         method: "GET",

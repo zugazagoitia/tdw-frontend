@@ -2,6 +2,7 @@ import {registerUser, usernameAvailable} from "../repositories/userRepository.js
 
 export async function setUpRegisterForm() {
 
+    // noinspection JSUnresolvedFunction
     const calendars = bulmaCalendar.attach('[type="date"]', {
         type: 'date',
         dateFormat: 'yyyy-MM-dd',
