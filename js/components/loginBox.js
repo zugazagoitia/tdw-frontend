@@ -1,5 +1,4 @@
-import {auth, clearSession} from "./sessionRepository.js";
-import {loadSampleData} from "./sampleData.js";
+import {auth, clearSession} from "../repositories/sessionRepository.js";
 
 export async function setUpLoginBar(session) {
     document.addEventListener('DOMContentLoaded', () => {
@@ -19,13 +18,17 @@ export async function setUpLoginBar(session) {
         logout();
     }
 
-    document.getElementById('sampleDataButton').onclick = function () {
-        loadSampleData();
-    }
-
-    if(session.role() === 'writer') {
-        document.getElementById("loggedInName").innerHTML = session.username;
+    if (session.role !== 'user') {
+        document.getElementById("loggedInName").innerHTML = session.user.username;
         hideLoginBox();
+        if(session.role === 'writer') {
+            let usersButton =
+            document.getElementById("usersAdminButton");
+           usersButton.classList.remove("is-hidden");
+           usersButton.onclick = function () {
+               window.location.href = "users.html";
+           }
+        }
     }
 
 }
@@ -40,12 +43,16 @@ export async function login() {
         alert("Por favor, rellene todos los campos");
         return;
     }
-    let result = auth(formData.get("username"), formData.get("password"));
+
+    document.getElementById("loginButton").classList.add("is-loading");
+    let result = await auth(formData.get("username"), formData.get("password"));
+    document.getElementById("loginButton").classList.remove("is-loading");
 
     if (result == null) {
         document.getElementById("wrongLoginNotification").classList.remove("is-hidden");
     } else {
-
+        window.history.replaceState({page: location.pathname}, document.title, window.location.pathname);
+        window.history.pushState({page: location.pathname}, document.title, window.location.pathname);
         window.location.reload();
     }
 
@@ -54,7 +61,8 @@ export async function login() {
 
 export async function logout() {
     clearSession();
-    window.location.reload();
+    //Redirect to index page using location.replace
+    window.location.replace("./index.html");
 }
 
 function hideLoginBox() {

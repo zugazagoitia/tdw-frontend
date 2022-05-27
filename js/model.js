@@ -1,29 +1,23 @@
 /**
  * Modela los diferentes tipos de usuario.
  */
-export class User{
+export class User {
 
-    constructor() {
+    constructor(id, username, email, active, birthDate, name, eTag) {
         this._role = "user";
+        this._id = id;
+        this._username = username;
+        this._email = email;
+        this._active = active;
+        this._birthDate = birthDate;
+        this._name = name;
+        this._eTag = eTag;
     }
-    role(){
+
+    role() {
         return "user";
     }
-}
 
-export class Reader extends User{
-
-    constructor() {
-        super();
-        this._role = "reader";
-    }
-
-    role(){
-        return "reader";
-    }
-}
-
-export class Writer extends User{
     get username() {
         return this._username;
     }
@@ -32,29 +26,39 @@ export class Writer extends User{
         this._username = value;
     }
 
-    get password() {
-        return this._password;
+    get id() {
+        return this._id;
     }
 
-    set password(value) {
-        this._password = value;
-    }
-    constructor(username,password) {
-        super();
-        this._username = username;
-        this._password = password;
-        this._role= "writer";
+    set id(value) {
+        this._id = value;
     }
 
-    role(){
-        return "writer";
-    }
-}
 
-/**
- * Modela los diferentes tipos datos a mostrar.
- */
-export class DataElement{
+    get email() {
+        return this._email;
+    }
+
+    set email(value) {
+        this._email = value;
+    }
+
+    get active() {
+        return this._active;
+    }
+
+    set active(value) {
+        this._active = value;
+    }
+
+    get birthDate() {
+        return this._birthDate;
+    }
+
+    set birthDate(value) {
+        this._birthDate = value;
+    }
+
     get name() {
         return this._name;
     }
@@ -63,28 +67,106 @@ export class DataElement{
         this._name = value;
     }
 
-    get birth() {
-        return this._birth;
+    get eTag() {
+        return this._eTag;
     }
 
-    set birth(value) {
-        this._birth = value;
+    set eTag(value) {
+        this._eTag = value;
+    }
+}
+
+export class Reader extends User {
+
+    constructor(id, username, email, active, birthDate, name, eTag) {
+        super(id, username, email, active, birthDate, name, eTag);
+        this._role = "reader";
     }
 
-    get death() {
-        return this._death;
+    role() {
+        return "reader";
+    }
+}
+
+export class Writer extends User {
+
+    constructor(id, username, email, active, birthDate, name, eTag) {
+        super(id, username, email, active, birthDate, name, eTag);
+        this._role = "writer";
     }
 
-    set death(value) {
-        this._death = value;
+    role() {
+        return "writer";
+    }
+}
+
+
+export class Session {
+    constructor(user, token, role) {
+        this._user = user;
+        this._token = token;
+        this._role = role;
     }
 
-    get imgUrl() {
-        return this._imgUrl;
+    get user() {
+        return this._user;
     }
 
-    set imgUrl(value) {
-        this._imgUrl = value;
+    set user(value) {
+        this._user = value;
+    }
+
+    get token() {
+        return this._token;
+    }
+
+    set token(value) {
+        this._token = value;
+    }
+
+    get role() {
+        return this._role;
+    }
+
+    set role(value) {
+        this._role = value;
+    }
+}
+
+/**
+ * Modela los diferentes tipos datos a mostrar.
+ */
+export class DataElement {
+    get name() {
+        return this._name;
+    }
+
+    set name(value) {
+        this._name = value;
+    }
+
+    get birthDate() {
+        return this._birthDate;
+    }
+
+    set birthDate(value) {
+        this._birthDate = value;
+    }
+
+    get deathDate() {
+        return this._deathDate;
+    }
+
+    set deathDate(value) {
+        this._deathDate = value;
+    }
+
+    get imageUrl() {
+        return this._imageUrl;
+    }
+
+    set imageUrl(value) {
+        this._imageUrl = value;
     }
 
     get wikiUrl() {
@@ -94,53 +176,100 @@ export class DataElement{
     set wikiUrl(value) {
         this._wikiUrl = value;
     }
-    constructor(name,birth,death,imgUrl,wikiUrl) {
+
+    get id() {
+        return this._id;
+    }
+
+    set id(value) {
+        this._id = value;
+    }
+
+    get eTag() {
+        return this._eTag;
+    }
+
+    set eTag(value) {
+        this._eTag = value;
+    }
+
+    constructor(id, name, birthDate, deathDate, imageUrl, wikiUrl, eTag) {
 
         this._name = name;
-        this._birth = birth;
-        this._death = death;
-        this._imgUrl = imgUrl;
+        this._birthDate = birthDate;
+        this._deathDate = deathDate;
+        this._imageUrl = imageUrl;
         this._wikiUrl = wikiUrl;
+        this._id = id;
+        this._eTag = eTag;
     }
+
 }
 
-export class Person extends DataElement{
+export class Person extends DataElement {
 
-    constructor(name, birth, death, imgUrl, wikiUrl) {
-        super(name, birth, death, imgUrl, wikiUrl);
-    }
-}
-
-export class Entity extends DataElement{
-
-    constructor(name, birth, death, imgUrl, wikiUrl, people) {
-        super(name, birth, death, imgUrl, wikiUrl);
-        this._people = people;
+    constructor(id, name, birth, death, imgUrl, wikiUrl, eTag, entities, products) {
+        super(id, name, birth, death, imgUrl, wikiUrl, eTag);
+        this._entities = entities;
+        this._products = products;
     }
 
-    get people(){
-        return this._people;
+    get entities() {
+        return this._entities;
     }
 
-    set people(people){
-        this._people=people;
-    }
-}
-
-export class Product extends DataElement{
-
-    constructor(name, birth, death, imgUrl, wikiUrl, people, entities) {
-        super(name, birth, death, imgUrl, wikiUrl);
-        this._people = people;
+    set entities(entities) {
         this._entities = entities;
     }
 
-    get people(){
+    get products() {
+        return this._products;
+    }
+
+    set entities(products) {
+        this._products = products;
+    }
+}
+
+export class Entity extends DataElement {
+
+    constructor(id, name, birth, death, imgUrl, wikiUrl, eTag, people, products) {
+        super(id, name, birth, death, imgUrl, wikiUrl, eTag);
+        this._people = people;
+        this._products = products;
+    }
+
+    get people() {
         return this._people;
     }
 
-    set people(people){
-        this._people=people;
+    set people(people) {
+        this._people = people;
+    }
+
+    get products() {
+        return this._products;
+    }
+
+    set entities(products) {
+        this._products = products;
+    }
+}
+
+export class Product extends DataElement {
+
+    constructor(id, name, birthDate, deathDate, imageUrl, wikiUrl, eTag, persons, entities) {
+        super(id, name, birthDate, deathDate, imageUrl, wikiUrl, eTag);
+        this._persons = persons;
+        this._entities = entities;
+    }
+
+    get people() {
+        return this._persons;
+    }
+
+    set people(people) {
+        this._persons = people;
     }
 
 

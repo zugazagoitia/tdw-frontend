@@ -5,13 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Alberto Zugazagoitia">
     <title>Anales de la Ciencia</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-calendar@6.1.18/dist/css/bulma-calendar.min.css"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script
+            src="/js/external/bulma-calendar.min.js"></script>
 </head>
 <body>
 
-<header class="hero is-primary">
+<header class="hero is-primary is-small">
     <div class="container hero-body">
-        <h1 class="title is-1">
+        <h1 class="title is-3">
             Anales de la Ciencia
         </h1>
     </div>
@@ -20,9 +27,6 @@
 
 <!---  LOGIN BOX --->
 <section class="section">
-    <div class="container box is-flex is-justify-content-center">
-        <button class="button is-info is-light is-center" id="sampleDataButton">Cargar datos de Prueba a LocalStorage</button>
-    </div>
 
     <div class="container">
         <div class="notification is-danger is-light is-hidden" id="wrongLoginNotification">
@@ -42,22 +46,21 @@
                         </div>
                     </div>
 
-                    <div class="level-item">
+                    <div class="level-item my-2">
                         <label class="label">Contraseña: </label>
                     </div>
 
-                    <div class="field level-item mb-0">
+                    <div class="field level-item mb-0 my-2">
 
                         <div class="control">
                             <input class="input" type="password" name="password" placeholder="********">
                         </div>
                     </div>
 
-                    <div class="level-item">
-                        <button class="button is-primary" type="submit">Login</button>
+                    <div class="level-item mx-1">
+                        <button class="button is-secondary" type="submit" id="loginButton">Iniciar Sesión</button>
                     </div>
                 </div>
-
             </div>
 
         </form>
@@ -70,7 +73,14 @@
                 </div>
                 <div class="level-right">
                     <div class="level-item">
-                        <button class="button is-primary" id="logoutButton">Logout</button>
+                        <button class="button is-secondary is-hidden" id="usersAdminButton">Administrar Usuarios
+                        </button>
+                    </div>
+                    <div class="level-item">
+                        <button class="button is-secondary" id="editProfileButton">Editar Perfil</button>
+                    </div>
+                    <div class="level-item">
+                        <button class="button is-primary" id="logoutButton">Cerrar Sesión</button>
                     </div>
                 </div>
             </div>
@@ -79,21 +89,114 @@
 
 
 </section>
-
 <!--- /LOGIN BOX --->
 
+<!---  HEADER --->
+<section class="section pt-2" id="headerAnales">
+    <div class="container box has-background-info">
+        <div class="hero is-info is-medium">
+            <div class="hero-body">
+                <div class="container has-text-centered">
+                    <p class="title is-1">
+                        Bienvenido a Anales de la Ciencia
+                    </p>
+                    <p class="subtitle is-4">
+                        Repositorio privado de anales de la ciencia y ciencias de la computación. <br>
+                        <strong>¡Registrate o inicia sesión para ver los anales!</strong>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+        <div class="card" id="registerBox">
+            <div class="card-content">
+                <h1 class="title has-text-centered">Registro</h1>
+                <!---  REGISTER FORM  including a username, email, password and password confirmation, also name and birth --->
+                <form id="registerForm">
+                    <div class="field">
+                        <label class="label">Usuario</label>
+                        <div class="control has-icons-left has-icons-right">
+                            <input class="input" type="text" placeholder="Usuario" name="username">
+                            <span class="icon is-small is-left">
+                              <i class="fas fa-user"></i>
+                            </span>
+                            <span class="icon is-small is-right is-hidden" id="username-available-icon">
+                              <i class="fas fa-check"></i>
+                            </span>
+                            <span class="icon is-small is-right is-hidden" id="username-wrong-icon">
+                              <i class="fas fa-exclamation-triangle"></i>
+                            </span>
+                        </div>
+                        <p class="help is-success is-hidden" id="username-available-text">El usuario está disponible</p>
+                        <p class="help is-danger is-hidden" id="username-wrong-text">Este usuario está en uso</p>
+                    </div>
+                    <div class="field">
+                        <label class="label">Email</label>
+                        <div class="control has-icons-left">
+                            <input class="input" type="email" placeholder="Email" name="email">
+                            <span class="icon is-small is-left">
+                              <i class="fas fa-envelope"></i>
+                            </span>
+                        </div>
+
+                    </div>
+                    <div class="field">
+                        <label class="label">Contraseña</label>
+                        <div class="control">
+                            <input class="input" type="password" placeholder="Contraseña" name="password">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Nombre</label>
+                        <div class="control">
+                            <input class="input" type="text" placeholder="Nombre" name="name">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Fecha de nacimiento</label>
+                        <div class="control">
+                            <input class="input" type="date" placeholder="Fecha de nacimiento" name="birth">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <button class="button is-primary" type="submit" id="registerButton">Registrarse</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!--- /HEADER --->
+
 <!---  CONTENT --->
-<section class="section pt-2">
+<section class="section pt-2 is-hidden" id="columns-section">
     <div class="container box" style="background-color: rgba(0,209,178,0.44)">
         <div class="columns">
             <div class="column" id="productCol">
-
+                <progress class="progress is-large is-info" max="100">60%</progress>
+                <div class="has-text-centered is-hidden" id="emptyColItem">
+                    <p class="title is-4">
+                        No hay productos disponibles
+                    </p>
+                </div>
             </div>
             <div class="column" id="personCol">
-
+                <progress class="progress is-large is-info" max="100">60%</progress>
+                <div class="has-text-centered is-hidden" id="emptyColItem">
+                    <p class="title is-4">
+                        No hay personas disponibles
+                    </p>
+                </div>
             </div>
             <div class="column" id="entityCol">
-
+                <progress class="progress is-large is-info" max="100">60%</progress>
+                <div class="has-text-centered is-hidden" id="emptyColItem">
+                    <p class="title is-4">
+                        No hay entidades disponibles
+                    </p>
+                </div>
             </div>
         </div>
     </div>
@@ -107,17 +210,19 @@
                 </button>
             </div>
             <div class="column">
-                <button class="button is-info is-fullwidth" type="button" id="addPersonButton">Agregar Persona</button>
+                <button class="button is-info is-fullwidth" type="button" id="addPersonButton">Agregar Persona
+                </button>
             </div>
             <div class="column">
-                <button class="button is-info is-fullwidth" type="button" id="addEntityButton">Agregar Entidad</button>
+                <button class="button is-info is-fullwidth" type="button" id="addEntityButton">Agregar Entidad
+                </button>
             </div>
         </div>
     </div>
 </section>
-
 <!--- /CONTENT --->
 
+<!---  EDIT DATAELEMENT MODAL--->
 <div class="modal" id="edit-data-modal">
     <div class="modal-background"></div>
     <div class="modal-card">
@@ -136,13 +241,13 @@
                 <div class="field">
                     <label class="label">Nacimiento</label>
                     <div class="control">
-                        <input class="input" type="text" name="birth" placeholder="Nacimiento">
+                        <input class="input" type="date" name="birth" placeholder="Nacimiento">
                     </div>
                 </div>
                 <div class="field">
                     <label class="label">Muerte</label>
                     <div class="control">
-                        <input class="input" type="text" name="death" placeholder="Muerte">
+                        <input class="input" type="date" name="death" placeholder="Muerte">
                     </div>
                 </div>
                 <div class="field">
@@ -169,14 +274,108 @@
                     <select name="entities[]" multiple size="3" id="entityList">
                     </select>
                 </div>
+
+                <!-- Product list -->
+                <div class="select is-multiple is-fullwidth pt-2 is-hidden" id="productListBox">
+                    <label class="label">Productos</label>
+                    <select name="products[]" multiple size="3" id="productList">
+                    </select>
+                </div>
             </form>
         </section>
         <footer class="modal-card-foot">
-            <button class="button is-success" type="submit" form="edit-data-form" id="modal-save-button">Guardar cambios</button>
+            <button class="button is-success" type="submit" form="edit-data-form" id="modal-save-button">Guardar
+                cambios
+            </button>
             <button class="button" type="button" id="modal-cancel-button">Cancelar</button>
         </footer>
     </div>
 </div>
+<!--- /EDIT DATAELEMENT MODAL--->
+
+<!---  EDIT PROFILE MODAL--->
+<!-- User Modal -->
+<div class="modal" id="edit-user-modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">Editar Perfil</p>
+            <button class="delete" id="user-modal-close-button" aria-label="cerrar"></button>
+        </header>
+        <section class="modal-card-body">
+            <form id="edit-user-form">
+                <fieldset disabled>
+                    <div class="field">
+                        <label class="label">Id</label>
+                        <div class="control">
+                            <input class="input is-disabled" type="number" name="id" placeholder="ID">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Usuario</label>
+                        <div class="control has-icons-left ">
+                            <input class="input" type="text" placeholder="Usuario" name="username">
+                            <span class="icon is-small is-left">
+                              <i class="fas fa-user"></i>
+                            </span>
+                        </div>
+
+                    </div>
+                </fieldset>
+
+                <div class="field">
+                    <label class="label">Contraseña</label>
+                    <div class="control">
+                        <input class="input" type="password" name="password" placeholder="Contraseña">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Email</label>
+                    <div class="control">
+                        <input class="input" type="email" name="email" placeholder="Email">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Nombre</label>
+                    <div class="control">
+                        <input class="input" type="text" name="name" placeholder="Nombre">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Nacimiento</label>
+                    <div class="control">
+                        <input class="input" type="date" name="birth" placeholder="Nacimiento">
+                    </div>
+                </div>
+
+                <fieldset disabled>
+                    <div class="field">
+                        <label class="label">Rol
+                        </label>
+                        <div class="control">
+                            <div class="select">
+                                <select name="role">
+                                    <option value="reader">Reader</option>
+                                    <option value="writer">Writer</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+            </form>
+        </section>
+        <footer class="modal-card-foot">
+            <button class="button is-success" type="submit" form="edit-user-form" id="user-modal-save-button">Guardar
+                cambios
+            </button>
+            <button class="button" type="button" id="user-modal-cancel-button">Cancelar</button>
+        </footer>
+    </div>
+</div>
+<!--/User Modal -->
+<!--- /EDIT PROFILE MODAL--->
+
 
 </body>
 
@@ -186,19 +385,20 @@
             <a id="card-link">
                 <div class="content">
                     <div class="level">
-                        <div class="level-left level-item">
+                        <div class="level-item">
                             <div class="image is-64x64 mb-0 mr-3 " style="overflow: hidden">
                                 <img id="card-img" src="IMAGE_URL">
                             </div>
-                            <h3 id="card-name" class="subtitle is-3 mt-0">DATA_NAME</h3>
+                        </div>
+                        <div class="level-item" style="width: 100%">
+                            <span id="card-name" class="subtitle is-size-3-fullhd is-size-4-desktop is-size-5-tablet mt-0">DATA_NAME</span>
                         </div>
                     </div>
-                </div>
             </a>
         </div>
         <div class="card-footer is-hidden" id="card-delete">
             <div class="card-footer-item">
-                <span id="card-delete-button" class="has-text-weight-bold">Eliminar</span>
+                <button id="card-delete-button" class="button has-text-weight-bold">Eliminar</button>
             </div>
         </div>
     </div>

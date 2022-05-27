@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es-ES" class="has-background-info-light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Alberto Zugazagoitia">
+    <title>Anales de la Ciencia</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-calendar@6.1.18/dist/css/bulma-calendar.min.css"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script
+            src="/js/external/bulma-calendar.min.js"></script>
+</head>
+<body>
+
+<header class="hero is-primary">
+    <div class="container hero-body">
+        <h1 class="title is-1">
+            Anales de la Ciencia
+        </h1>
+    </div>
+</header>
+
+
+<!-- Navbar -->
+<section class="section">
+    <div class="container ">
+        <form class="box has-background-info-light">
+            <div class="level">
+                <div class="level-left">
+                    <div class="level-item">
+                        <button class="button is-primary" type="button" id="index-button">Índice</button>
+                    </div>
+                </div>
+                <div class="level-right" id="crudMenu">
+                    <div class="level-item">
+                        <button class="button is-primary is-light" type="button" id="addUserButton">Añadir Usuario
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+<!--/Navbar -->
+
+<!-- Main -->
+<section class="container box has-background-info-light" style="background-color: rgba(0,209,178,0.44)">
+    <progress class="progress is-large is-primary" id="progressBar" max="100">
+        <span class="progress-percentage">25%</span>
+    </progress>
+
+    <table class="table is-striped is-hoverable is-fullwidth" id="usersTable">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>Usuario</th>
+            <th>Email</th>
+            <th>Nombre</th>
+            <th>Fecha de Nacimiento</th>
+            <th>Rol</th>
+            <th>Activo</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody id="usersTableBody">
+
+        </tbody>
+    </table>
+</section>
+<!--/Main -->
+
+<!-- User Modal -->
+<div class="modal" id="edit-user-modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">Editar Usuario</p>
+            <button class="delete" id="modal-close-button" aria-label="cerrar"></button>
+        </header>
+        <section class="modal-card-body">
+            <form id="edit-user-form">
+                <fieldset disabled>
+                    <div class="field">
+                        <label class="label">Id</label>
+                        <div class="control">
+                            <input class="input is-disabled" type="number" name="id" placeholder="ID">
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="field">
+                    <label class="label">Contraseña</label>
+                    <div class="control">
+                        <input class="input" type="password" name="password" placeholder="Contraseña">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Usuario</label>
+                    <div class="control has-icons-left has-icons-right">
+                        <input class="input" type="text" placeholder="Usuario" name="username">
+                        <span class="icon is-small is-left">
+                              <i class="fas fa-user"></i>
+                            </span>
+                        <span class="icon is-small is-right is-hidden" id="username-available-icon">
+                              <i class="fas fa-check"></i>
+                            </span>
+                        <span class="icon is-small is-right is-hidden" id="username-wrong-icon">
+                              <i class="fas fa-exclamation-triangle"></i>
+                            </span>
+                    </div>
+                    <p class="help is-success is-hidden" id="username-available-text">El usuario está disponible</p>
+                    <p class="help is-danger is-hidden" id="username-wrong-text">Este usuario está en uso</p>
+                </div>
+
+                <div class="field">
+                    <label class="label">Email</label>
+                    <div class="control">
+                        <input class="input" type="email" name="email" placeholder="Email">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Nombre</label>
+                    <div class="control">
+                        <input class="input" type="text" name="name" placeholder="Nombre">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Nacimiento</label>
+                    <div class="control">
+                        <input class="input" type="date" name="birth" placeholder="Nacimiento">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Rol
+                    </label>
+                    <div class="control">
+                        <div class="select">
+                            <select name="role">
+                                <option value="reader">Reader</option>
+                                <option value="writer">Writer</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="checkbox">
+                        <input type="checkbox" name="active">
+                        Enable login
+                    </label>
+                </div>
+            </form>
+        </section>
+        <footer class="modal-card-foot">
+            <button class="button is-success" type="submit" form="edit-user-form" id="modal-save-button">Guardar
+                cambios
+            </button>
+            <button class="button" type="button" id="modal-cancel-button">Cancelar</button>
+        </footer>
+    </div>
+</div>
+<!--/User Modal -->
+
+</body>
+
+<!-- Templates -->
+<template id="data-card-content-template">
+    <div class="content container">
+        <h2 class="is-2 has-text-centered" id="card-data-name"></h2>
+        <h3 class="is-3 has-text-centered" id="card-data-born"></h3>
+        <figure class="image">
+            <img class="mt-2" src="img/1200px-HTML5_logo_black.svg.png" id="card-data-img">
+        </figure>
+    </div>
+</template>
+
+<template id="table-row-template">
+    <tr>
+        <td class="has-text-left" id="table-row-id"></td>
+        <td class="has-text-left" id="table-row-username"></td>
+        <td class="has-text-left" id="table-row-email"></td>
+        <td class="has-text-left" id="table-row-name"></td>
+        <td class="has-text-left" id="table-row-born"></td>
+        <td class="has-text-left" id="table-row-role"></td>
+        <td class="has-text-left" id="table-row-active"></td>
+        <td class="has-text-left">
+            <button class="button is-small is-info" id="table-row-edit">Editar</button>
+            <button class="button is-small is-danger" id="table-row-delete">Eliminar</button>
+        </td>
+    </tr>
+</template>
+
+
+<!--/Templates -->
+
+<script type="module" src="js/main.js"></script>
+
+</html>
