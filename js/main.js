@@ -18,7 +18,7 @@ import {setUpUsersView} from "./views/users.js";
  */
 
 export function serverUrl() {
-    return "http://localhost:8000/";
+    return "https://tdw.zuga.pw/";
 }
 
 export function apiBaseUrl() {
