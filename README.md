@@ -9,13 +9,12 @@ Se puede ejecutar bajo un servidor web, como Apache o en un IDE como JetBrains W
 ## Uso
 - La web está disponible en [GitHub Pages](https://zugazagoitia.github.io/tdw-frontend/)
 
-- Para cargar los datos de prueba se puede usar el botón correspondiente en el índice.
+- Los datos se obtienen del API implementado en [php](https://github.com/zugazagoitia/TDW-practica-php).
 
-- Se dispone de credenciales de prueba para el rol de _writer_.
+- Se dispone de credenciales de prueba:
 
 | Usuario       | Contraseña |
 |---------------|------------|
-| `hemingway`   | `123456`   |
-| `dostoyevsky` | `password` |
-| `tolstoy`     | `qwerty`   |
-
+| `writer`   | `writer`   |
+| `reader` | `reader` |
+| `inactivo` | `inactivo`   |
