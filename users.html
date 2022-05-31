@@ -55,6 +55,7 @@
         <thead>
         <tr>
             <th>id</th>
+            <th>Fecha de Registro</th>
             <th>Usuario</th>
             <th>Email</th>
             <th>Nombre</th>
@@ -88,6 +89,11 @@
                             <input class="input is-disabled" type="number" name="id" placeholder="ID">
                         </div>
                     </div>
+                    <div class="field">
+                        <label class="label">Fecha de registro</label>
+                        <div class="control">
+                            <input class="input" type="text" name="registerDate" placeholder="Fecha">
+                        </div>
                 </fieldset>
 
                 <div class="field">
@@ -180,6 +186,7 @@
 <template id="table-row-template">
     <tr>
         <td class="has-text-left" id="table-row-id"></td>
+        <td class="has-text-left" id="table-row-registerDate"></td>
         <td class="has-text-left" id="table-row-username"></td>
         <td class="has-text-left" id="table-row-email"></td>
         <td class="has-text-left" id="table-row-name"></td>

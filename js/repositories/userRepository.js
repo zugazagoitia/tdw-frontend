@@ -195,9 +195,9 @@ export async function usernameAvailable(username) {
 export function parseUser(user) {
     switch (user.role) {
         case "writer":
-            return new Writer(user.id, user.username, user.email, user.active, user.birthDate, user.name,user.eTag);
+            return new Writer(user.id, user.username, user.email, user.active, user.birthDate, user.name,user.eTag,user.registerTime);
         case "reader":
-            return new Reader(user.id, user.username, user.email, user.active, user.birthDate, user.name,user.eTag);
+            return new Reader(user.id, user.username, user.email, user.active, user.birthDate, user.name,user.eTag,user.registerTime);
         default:
             throw new Error("Unknown user role: " + user.role);
     }

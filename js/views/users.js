@@ -79,6 +79,7 @@ async function renderUsers() {
             "</span>"
 
         row.querySelector("#table-row-id").innerHTML = user.id;
+        row.querySelector("#table-row-registerDate").innerHTML = user.registerDate;
         row.querySelector("#table-row-name").innerHTML = user.name || "<small>N/A</small>";
         row.querySelector("#table-row-username").innerHTML = user.username || "<small>N/A</small>";
         row.querySelector("#table-row-email").innerHTML = user.email || "<small>N/A</small>";
@@ -332,6 +333,7 @@ async function fillEditFormWithCurrentDetails(user) {
 
     //Fill form with current data
     form.elements.namedItem("id").value = user.id;
+    form.elements.namedItem("registerDate").value = user.registerDate;
     form.elements.namedItem("name").value = user.name;
     form.elements.namedItem("username").value = user.username;
     form.elements.namedItem("email").value = user.email;

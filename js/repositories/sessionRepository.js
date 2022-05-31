@@ -22,7 +22,8 @@ export function loadSession() {
                         session._user._active,
                         session._user._birthDate,
                         session._user._name,
-                        session._user._eTag);
+                        session._user._eTag,
+                        session._user._registerDate);
                     break;
                 case 'reader':
                     user = new Reader(
@@ -32,7 +33,8 @@ export function loadSession() {
                         session._user._active,
                         session._user._birthDate,
                         session._user._name,
-                        session._user._eTag);
+                        session._user._eTag,
+                        session._user._registerDate);
                     break;
                 case 'user':
                 default:

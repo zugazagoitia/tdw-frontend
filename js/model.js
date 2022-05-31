@@ -3,7 +3,7 @@
  */
 export class User {
 
-    constructor(id, username, email, active, birthDate, name, eTag) {
+    constructor(id, username, email, active, birthDate, name, eTag, registerDate) {
         this._role = "user";
         this._id = id;
         this._username = username;
@@ -12,6 +12,7 @@ export class User {
         this._birthDate = birthDate;
         this._name = name;
         this._eTag = eTag;
+        this._registerDate = registerDate;
     }
 
     role() {
@@ -74,12 +75,20 @@ export class User {
     set eTag(value) {
         this._eTag = value;
     }
+
+    get registerDate() {
+        return this._registerDate;
+    }
+
+    set registerDate(value) {
+        this._registerDate = value;
+    }
 }
 
 export class Reader extends User {
 
-    constructor(id, username, email, active, birthDate, name, eTag) {
-        super(id, username, email, active, birthDate, name, eTag);
+    constructor(id, username, email, active, birthDate, name, eTag, registerDate) {
+        super(id, username, email, active, birthDate, name, eTag , registerDate);
         this._role = "reader";
     }
 
@@ -90,8 +99,8 @@ export class Reader extends User {
 
 export class Writer extends User {
 
-    constructor(id, username, email, active, birthDate, name, eTag) {
-        super(id, username, email, active, birthDate, name, eTag);
+    constructor(id, username, email, active, birthDate, name, eTag , registerDate) {
+        super(id, username, email, active, birthDate, name, eTag , registerDate);
         this._role = "writer";
     }
 

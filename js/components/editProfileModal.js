@@ -96,6 +96,7 @@ async function populateModal(){
 
     //Fill form with current data
     form.elements.namedItem("id").value = user.id;
+    form.elements.namedItem("registerDate").value = user.registerDate;
     form.elements.namedItem("name").value = user.name;
     form.elements.namedItem("username").value = user.username;
     form.elements.namedItem("email").value = user.email;
