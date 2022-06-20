@@ -7,7 +7,7 @@ La web no funciona con el protocolo file://, por lo que se ha creado una web de 
 Se puede ejecutar bajo un servidor web, como Apache o en un IDE como JetBrains WebStorm.
 
 ## Uso
-- La web está disponible en [GitHub Pages](https://zugazagoitia.github.io/tdw-frontend/)
+- La web está disponible en [GitHub Pages](https://zugazagoitia.github.io/tdw-frontend/) (El API ya no está disponible.)
 
 - Los datos se obtienen del API implementado en [php](https://github.com/zugazagoitia/TDW-practica-php).
 
